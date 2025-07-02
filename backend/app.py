@@ -16,18 +16,23 @@ vectorizer_path = os.path.join(BASE_DIR, "vectorizer.pkl")
 model = pickle.load(open(model_path, "rb"))
 vectorizer = pickle.load(open(vectorizer_path, "rb"))
 
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['GET', 'POST'])
 def predict():
+    if request.method == 'GET':
+        return jsonify({'message': 'Service is running'}), 200
+
     data = request.get_json()
-    if not data or 'text' not in data:
+    tweet = data.get('text', '')
+    if not tweet:
         return jsonify({'error': 'No text provided'}), 400
     try:
-        tweet_vector = vectorizer.transform([data['text']])
-        pred = model.predict(tweet_vector)[0]
-        sentiment = 'Positive' if pred == 1 else 'Negative'
+        tweet_vector = vectorizer.transform([tweet])
+        prediction = model.predict(tweet_vector)[0]
+        sentiment = "Positive" if prediction == 1 else "Negative"
         return jsonify({'prediction': sentiment})
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
 
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 10000))
