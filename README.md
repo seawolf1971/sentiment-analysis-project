@@ -1,7 +1,10 @@
 # 🧠 Sentiment Analysis Project
 
 A full-stack machine learning application for real-time Twitter sentiment classification. This project includes a trained ML model, a Flask backend API, and a React + Chakra UI frontend for user interaction.
+---
+## 🚀 Live Demo
 
+👉 Try it here: [https://sentiment-analysis-project-wheat.vercel.app](https://sentiment-analysis-project-wheat.vercel.app)
 ---
 
 ## 📁 Project Structure
