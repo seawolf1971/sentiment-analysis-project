@@ -4,7 +4,7 @@ import { Box, Textarea, Button, Alert, AlertIcon } from '@chakra-ui/react';
 function PredictionForm() {
   const [text, setText] = useState('');
   const [prediction, setPrediction] = useState('');
-  const [error, setError] = useState('');  // ✅ Eksik olan bu satır
+  const [error, setError] = useState('');
 
   const API_URL = process.env.REACT_APP_API_URL;
 
@@ -13,6 +13,7 @@ function PredictionForm() {
     setPrediction('');
     setError('');
 
+    console.log("API_URL:", API_URL);
     console.log("Submitting:", text);
 
     try {
@@ -21,8 +22,6 @@ function PredictionForm() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ text }),
       });
-
-      console.log("Raw response:", response);
 
       const data = await response.json();
       console.log("Response JSON:", data);
