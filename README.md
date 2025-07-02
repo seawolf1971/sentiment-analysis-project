@@ -1,70 +1,132 @@
-# Getting Started with Create React App
+# 🧠 Sentiment Analysis Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack machine learning application for real-time Twitter sentiment classification. This project includes a trained ML model, a Flask backend API, and a React + Chakra UI frontend for user interaction.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📁 Project Structure
 
-### `npm start`
+```
+sentiment-analysis-project/
+│
+├── backend/
+│   ├── app.py                # Flask API to serve predictions
+│   ├── vectorizer.pkl        # TF-IDF vectorizer for preprocessing
+│   ├── trained_model.sav     # Trained Logistic Regression model
+│   └── requirements.txt      # Backend dependencies
+│
+├── frontend/
+│   └── ...                   # React + Chakra UI frontend
+│
+├── notebooks/
+│   └── # Kaggle notebook for model training
+│
+└── README.md                 # Project documentation
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 💡 Technologies Used
 
-### `npm test`
+### 🔍 Machine Learning & Data Processing (Python)
+- **NumPy & Pandas**: Data exploration and manipulation.
+- **Scikit-learn**: TF-IDF vectorization and Logistic Regression model.
+- **NLTK (PorterStemmer)**: Word stemming to reduce to root form.
+- **Model Accuracy**: Achieved ~80% accuracy on test data.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 🔙 Backend (Python + Flask)
+- **Flask**: Lightweight REST API to serve the machine learning model.
+- **Pickle**: Model and vectorizer serialization/deserialization.
 
-### `npm run build`
+### 🌐 Frontend (React + Chakra UI)
+- **React**: SPA (Single Page Application) for real-time sentiment prediction.
+- **Chakra UI**: Accessible and modern UI component styling.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### 🛠 Additional Tools
+- **Postman**: For testing API endpoints during development.
+- **VS Code & PowerShell**: For local development and Git integration.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+---
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 📊 Dataset
 
-### `npm run eject`
+- **Source**: [Sentiment140 - Kaggle](https://www.kaggle.com/datasets/kazanova/sentiment140)
+- **Size**: 1.6 million tweets labeled with sentiment
+  - `0` → Negative
+  - `4` → Positive (converted to `1`)
+- **Fields**: `target`, `id`, `date`, `flag`, `user`, `text`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## ⚙️ Model Workflow
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. **Data Cleaning**:
+   - Remove non-alphabetic characters
+   - Lowercase all text
+   - Remove stopwords
+   - Apply stemming
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+2. **Vectorization**:
+   - TF-IDF vectorizer converts text into numerical feature vectors
 
-## Learn More
+3. **Model Training**:
+   - Train a Logistic Regression classifier on the processed dataset
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+4. **Model Evaluation**:
+   - Training Accuracy: ~81%
+   - Testing Accuracy: ~77.8%
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+5. **Export**:
+   - Save model and vectorizer using `pickle`
 
-### Code Splitting
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## 🚀 Running the App Locally
 
-### Analyzing the Bundle Size
+### 1. Clone the Repository
+```bash
+git clone https://github.com/yourusername/sentiment-analysis-project.git
+cd sentiment-analysis-project
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 2. Set Up Backend
+```bash
+cd backend
+pip install -r requirements.txt
+python app.py
+```
 
-### Making a Progressive Web App
+### 3. Start Frontend (React)
+```bash
+cd ../frontend
+npm install
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### 4. Test API
+Use Postman or the frontend UI to send a tweet and receive sentiment analysis.
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📓 Kaggle Notebook
 
-### Deployment
+The full training process, including:
+- Data preprocessing
+- TF-IDF transformation
+- Model training
+- Accuracy evaluation
+- Model/vectorizer saving
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Located in: `notebooks/sentiment_model_training.ipynb`
 
-### `npm run build` fails to minify
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📬 Contact
+
+Feel free to reach out with questions or improvements via GitHub Issues or Pull Requests.
+
+---
+
+## 🪪 License
+
+This project is licensed under the MIT License.
