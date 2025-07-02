@@ -8,22 +8,35 @@ function PredictionForm() {
   const API_URL = process.env.REACT_APP_API_URL;
 
   const handleSubmit = async (e) => {
-    e.preventDefault(); // ✅ Prevent the form from refreshing the page(!)
+  e.preventDefault();
+  setPrediction('');
+  setError('');
 
-    try {
-      const response = await fetch(`${API_URL}/predict`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text }),
-      });
+  console.log("Submitting:", text);  // ✅ Ne zaman çalışıyor görelim
 
-      const data = await response.json();
+  try {
+    const response = await fetch(`${API_URL}/predict`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text }),
+    });
+
+    console.log("Raw response:", response); // ✅ Hata mı dönüyor görelim
+
+    const data = await response.json();
+    console.log("Response JSON:", data); // ✅ İçerik ne görelim
+
+    if (response.ok && data.prediction) {
       setPrediction(data.prediction);
-    } catch (err) {
-      setPrediction('Error');
-      console.error('Prediction failed:', err);
+    } else {
+      setError(data.error || 'Unexpected error');
     }
-  };
+  } catch (err) {
+    setError('Bağlantı hatası');
+    console.error("Fetch error:", err);
+  }
+};
+
 
   return (
     <Box as="form" onSubmit={handleSubmit} mb="6">
