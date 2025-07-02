@@ -34,7 +34,7 @@ function PredictionForm() {
       }
     } catch (err) {
       setError('Bağlantı hatası');
-      console.error("Fetch error:", err);
+      console.error("Fetch error:", err.message);
     }
   };
 
