@@ -7,16 +7,16 @@ function PredictionForm() {
 
   const API_URL = process.env.REACT_APP_API_URL;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const response = await fetch(`${API_URL}/predict`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ text }),
-    });
-    const data = await response.json();
-    setPrediction(data.prediction);
-  };
+const handleSubmit = async () => {
+  const response = await fetch(`${API_URL}/predict`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ text }),
+  });
+  const data = await response.json();
+  setPrediction(data.prediction);
+};
+
 
   return (
     <Box as="form" onSubmit={handleSubmit} mb="6">
